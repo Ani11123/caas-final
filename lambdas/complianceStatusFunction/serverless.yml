@@ -1,14 +1,28 @@
 service: complianceStatusFunction
+
 provider:
   name: aws
-  runtime: nodejs18.x
+  runtime: nodejs16.x  # You can change this to nodejs16.x or another supported runtime
   region: us-east-1
+  stage: dev
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - config:DescribeComplianceByConfigRule  # Allow Lambda to access AWS Config rules
+        - config:DescribeConfigRules  # Optional: If you need to describe the rules
+        - logs:CreateLogStream
+        - logs:PutLogEvents
+      Resource: "*"  # Allow access to all Config rules
+
 functions:
   complianceStatus:
-    handler: handler.complianceStatus
-    timeout: 15
+    handler: handler.complianceStatus  # This is where your Lambda function is defined
     events:
       - http:
           path: compliance-status
           method: get
 
+# Exclude aws-sdk from being bundled and deployed
+package:
+  exclude:
+    - node_modules/aws-sdk/**  # Exclude the aws-sdk, which is included in the Lambda environment by default

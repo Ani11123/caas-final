@@ -65,6 +65,16 @@
                       "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/complianceStatusFunction-dev*:*:*"
                     }
                   ]
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "config:DescribeComplianceByConfigRule",
+                    "config:DescribeConfigRules",
+                    "logs:CreateLogStream",
+                    "logs:PutLogEvents"
+                  ],
+                  "Resource": "*"
                 }
               ]
             }
@@ -91,10 +101,10 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-us-east-1-f171f0b0-4fea",
-          "S3Key": "serverless/complianceStatusFunction/dev/1727256361953-2024-09-25T09:26:01.953Z/complianceStatusFunction.zip"
+          "S3Key": "serverless/complianceStatusFunction/dev/1727289982649-2024-09-25T18:46:22.649Z/complianceStatusFunction.zip"
         },
         "Handler": "handler.complianceStatus",
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs16.x",
         "FunctionName": "complianceStatusFunction-dev-complianceStatus",
         "MemorySize": 1024,
         "Timeout": 6,
@@ -109,14 +119,14 @@
         "ComplianceStatusLogGroup"
       ]
     },
-    "ComplianceStatusLambdaVersion4hFfCbgUjH1TjcOoKSqTpGBx47E7uwUbQ5xJL7y02vs": {
+    "ComplianceStatusLambdaVersionzmmwPivZ70rK5i3tMbu6SB73G8PqhZfCWdzZOpHM": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ComplianceStatusLambdaFunction"
         },
-        "CodeSha256": "uQT2rHYTfDZd3GAXHGcuFKg3bm51+A1YVPr653zz0iQ="
+        "CodeSha256": "oOu+ueUvEz/SCA1ZYS0zn7JsnK/tq05UPs7iuczhq3M="
       }
     },
     "ApiGatewayRestApi": {
@@ -192,7 +202,7 @@
         "ComplianceStatusLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1727256360985": {
+    "ApiGatewayDeployment1727289975609": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -252,7 +262,7 @@
     "ComplianceStatusLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ComplianceStatusLambdaVersion4hFfCbgUjH1TjcOoKSqTpGBx47E7uwUbQ5xJL7y02vs"
+        "Ref": "ComplianceStatusLambdaVersionzmmwPivZ70rK5i3tMbu6SB73G8PqhZfCWdzZOpHM"
       },
       "Export": {
         "Name": "sls-complianceStatusFunction-dev-ComplianceStatusLambdaFunctionQualifiedArn"
