@@ -1,0 +1,14 @@
+service: complianceStatusFunction
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+functions:
+  complianceStatus:
+    handler: handler.complianceStatus
+    timeout: 15
+    events:
+      - http:
+          path: compliance-status
+          method: get
+
